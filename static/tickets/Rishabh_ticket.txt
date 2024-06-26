@@ -1,4 +1,0 @@
-Name: Rishabh
-Grievance: My neighbor is stalking me through the balcony.
-Category: Harassment
-ID: 665e0c49c763c14c835841e5
