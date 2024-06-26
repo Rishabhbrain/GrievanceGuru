@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Input Form</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: url('https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDJ8fGJhY2tncm91bmR8ZW58MHx8fHwxNjM2MTI0NjE1&ixlib=rb-1.2.1&q=80&w=1080') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: rgba(0, 123, 255, 0.9);
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            z-index: 1;
+        }
+
+        .navbar a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .navbar a:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            width: 500px;
+            max-width: 90%;
+            margin-bottom: 20px;
+            margin-top: 70px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 24px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin: 10px 0 5px 0;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #007BFF;
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            background-color: #004494;
+        }
+
+        .form-image {
+            width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-results {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #333;
+            text-align: left;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function toggleSection(section) {
+            document.getElementById('submit-grievance-form').classList.add('hidden');
+            document.getElementById('search-by-id-form').classList.add('hidden');
+            document.getElementById(section).classList.remove('hidden');
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <a href="javascript:void(0)" onclick="toggleSection('submit-grievance-form')">Submit Grievance</a>
+        <a href="javascript:void(0)" onclick="toggleSection('search-by-id-form')">Search by Case ID</a>
+    </div>
+
+    <div class="container {% if search_result %}hidden{% endif %}" id="submit-grievance-form">
+        <h1>Submit a Grievance</h1>
+        <form action="/submit" method="post">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="grievance">Your Grievance:</label>
+            <input type="text" id="grievance" name="grievance" required>
+            <button type="submit">Submit</button>
+            <button type="button" onclick="window.location.href='/login'">Login</button>
+        </form>
+    </div>
+
+    <div class="container hidden" id="search-by-id-form">
+        <h1>Search by Case ID</h1>
+        <form action="/search" method="get">
+            <input type="text" id="search_id" name="search_id" placeholder="Enter Case ID..." required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    {% if search_result %}
+    <div class="container search-results">
+        <h2>Search Result</h2>
+        <p><strong>Name:</strong> {{ search_result.name }}</p>
+        <p><strong>Type:</strong> {{ search_result.Type }}</p>
+        <p><strong>Completed:</strong> {% if search_result.completed %}Yes{% else %}No{% endif %}</p>
+    </div>
+    {% endif %}
+
+    <footer>
+        <p>&copy; 2024 Grievance Categorization Tool</p>
+    </footer>
+</body>
+</html>

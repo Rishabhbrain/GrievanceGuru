@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Know Your Case</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Additional CSS styles */
+        body {
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        header {
+            text-align: center;
+            background-color: #337ab7;
+            color: #fff;
+            padding: 1em;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-between; /* Adjust alignment */
+            align-items: center; /* Align vertically */
+        }
+
+        nav li {
+            margin-right: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            color: #ccc;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #337ab7;
+        }
+
+        #grievance-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #grievance-text {
+            resize: vertical;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 600px;
+            height: 150px;
+            margin-bottom: 20px;
+        }
+
+        #categorize-grievance {
+            background-color: #337ab7;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        #categorize-grievance:hover {
+            background-color: #23527c;
+        }
+
+        .result-box {
+            background-color: #f7f7f7;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        #category {
+            font-size: 18px;
+            font-weight: bold;
+            color: #337ab7;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Know Your Case</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/know_your_case">Know Your Case</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="container">
+        <h2>Describe Your Grievance</h2>
+        <form action="#" method="post" id="grievance-form">
+            <textarea id="grievance-text" name="grievance_text" rows="6" placeholder="Type your grievance here..."></textarea>
+            <button type="submit" id="categorize-grievance">Categorize Grievance</button>
+        </form>
+        <div id="result" class="result-box">
+            <h3>Your Grievance Category:</h3>
+            <p id="category"></p>
+        </div>
+    </section>
+</body>
+</html>
